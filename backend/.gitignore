@@ -1,0 +1,16 @@
+#ignore venv
+venv/
+
+#ignore pycache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.vscode/
+.idea/
+
+#sys files ignore
+
+.DS_Store
+Thumbs.db
