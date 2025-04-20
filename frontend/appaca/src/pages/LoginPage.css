@@ -1,0 +1,52 @@
+.login-container {
+    background-color: #f1faee; /* Solid background for the container */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 400px;
+    width: 90%;
+    background: linear-gradient(to bottom right, #a8dadc, #457b9d); /* Apply gradient to the container */
+    min-height: 25vh; /* Make the container take full viewport height if desired */
+    justify-content: center; /* Center content vertically within the container if min-height is used */
+  }
+  
+
+.login-container h1 {
+    color: #1d3557;
+    margin-bottom: 20px;
+    font-size: 2em; /* Adjust as needed */
+}
+
+
+.login-container input.search {
+    border: none;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.login-container input.search:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(66, 153, 225, 0.5); /* Optional focus highlight */
+}
+
+.login-container button#searchBtn {
+    background-color: #1d3557;
+    color: #f1faee;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button#searchBtn:hover {
+    background-color: #0b132b;
+}
+
