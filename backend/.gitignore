@@ -7,6 +7,9 @@ __pycache__/
 *.pyo
 *.pyd
 
+#ignore database files
+*.db
+
 .vscode/
 .idea/
 
