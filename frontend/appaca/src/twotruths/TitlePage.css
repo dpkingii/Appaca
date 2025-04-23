@@ -1,18 +1,52 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
-.title-page {
-    height: 100vh;
-    background-color: #6dbf63; /* Green background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body{
+  margin-left: 0;
+  padding-left: 0;
 }
 
-.title-container h1 {
-  font-family: 'Fredoka One', cursive;
-  color: #5d3a00; /* brown color */
-  font-size: 4rem;
-  text-shadow: 2px 2px #a4743a;
+.title-page-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #a7e9af, #6dbf63);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-page-content {
   text-align: center;
+  border-radius: 15px; 
+  padding: 30px; 
+}
+
+.title-page-content h1 {
+font-family: 'Fredoka One', cursive;
+color: #5d3a00; /* brown color */
+font-size: 4rem;
+text-shadow: 2px 2px #a4743a;
+margin-bottom: 40px;
+}
+
+.title-page-content button {
+  background-color: #ffc857;
+  color: #5d3a00;
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px #a4743a;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.title-page-content button:hover {
+  background-color: #ffdb58;
+  transform: scale(1.05);
+}
+
+.title-page-content button:active {
+  transform: scale(0.95);
+  box-shadow: 1px 1px #a4743a;
 }
