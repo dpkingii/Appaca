@@ -5,9 +5,9 @@ import LoginPage from './LoginPage'
 import NotFound from './NotFound'
 import DisplayPage from './DisplayPage'
 import TitlePage from '../twotruths/TitlePage'
+import GameScreen from '../twotruths/GameScreen';
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage/>}/>
@@ -15,8 +15,9 @@ function App() {
       <Route path="/display" element={<DisplayPage/>} />
       <Route path="/notFound" element={<NotFound/>}/>
       <Route path="/twoTruths" element={<TitlePage/>}/>
+      <Route path="/game" element={<GameScreen />} />
     </Routes>
-  )
+  );
 }
 
 export default App
