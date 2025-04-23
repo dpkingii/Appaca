@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
 .fade-in {
     opacity: 0;
     animation: fadeIn ease-in 0.5s forwards;
@@ -8,3 +10,28 @@
   100% { opacity: 1; }
 }
 
+button{
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  width:400px;
+  height:60px;
+  text-align:center;
+  margin-bottom:5px;
+}
+
+.center p{
+  text-align:center;
+  margin-top:7px;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+p{
+  font-family:Titan One;
+}
+
+h1{
+  display: flex;
+  margin-left:-100px;
+  margin-top:10px;
+}

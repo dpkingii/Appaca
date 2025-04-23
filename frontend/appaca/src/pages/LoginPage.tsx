@@ -10,28 +10,31 @@ function LoginPage() {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate()
 
     const handleLogin = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/users/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username: username,    // Replace with the username
-                    email: email, // Replace with the email
-                    password: password, // Replace with the password
-                    role: role   })
-            });
-            if (!response.ok) {
-                throw new Error("Failed to create user.")
-            }
-            const data = await response.json();
-            console.log(`success: ${JSON.stringify(data)}`)
-        } catch (e) {
-            setError("Failed to register new user with given ID")
-            console.error(e)
-        }
+        navigate('/display/')
+
+        // try {
+        //     const response = await fetch("http://127.0.0.1:8000/users/", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({ username: username,    // Replace with the username
+        //             email: email, // Replace with the email
+        //             password: password, // Replace with the password
+        //             role: role   })
+        //     });
+        //     if (!response.ok) {
+        //         throw new Error("Failed to create user.")
+        //     }
+        //     const data = await response.json();
+        //     console.log(`success: ${JSON.stringify(data)}`)
+        // } catch (e) {
+        //     setError("Failed to register new user with given ID")
+        //     console.error(e)
+        // }
     };
 
     return (

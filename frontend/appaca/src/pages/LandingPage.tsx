@@ -19,14 +19,14 @@ function LandingPage() {
     return (
         <div>
             <h1>🦙 Appaca! 🦙</h1>
-            <p className="fade-in">Get ready to meet your mentor! 🦙</p>
+            <p style={{textAlign:'right'}} className="fade-in">Get ready to meet your mentor! 🦙</p>
             <Link to="/login">
-                <button>Login or Register</button>
+                <button className = "center"><p>Login or Register</p></button>
             </Link>
             <Link to="/notFound">
-                <button>Go to Not Found (placeholder and test)</button>
+                <button className = "center"><p>Go to Not Found (placeholder and test)</p></button>
             </Link>
-            <button onClick={fetchHello}>Fetch from API</button>
+            <button className = "center" onClick={fetchHello}><p>Fetch from API</p></button>
             {message && <p>{message}</p>}
         </div>
     )
