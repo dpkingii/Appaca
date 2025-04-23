@@ -10,7 +10,7 @@ function DisplayPage() {
         <>
             <h1>DisplayPage</h1>
                 <button onClick = {handleLogin}
-                id = "searchBtn"> Login </button>
+                id = "searchBtn"> Two Truth </button>
         </>
     )
 }
