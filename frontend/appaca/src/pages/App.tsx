@@ -4,6 +4,7 @@ import LandingPage from './LandingPage'
 import LoginPage from './LoginPage'
 import NotFound from './NotFound'
 import DisplayPage from './DisplayPage'
+import TitlePage from '../twotruths/TitlePage'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/display" element={<DisplayPage/>} />
       <Route path="/notFound" element={<NotFound/>}/>
+      <Route path="/twoTruths" element={<TitlePage/>}/>
     </Routes>
   )
 }
