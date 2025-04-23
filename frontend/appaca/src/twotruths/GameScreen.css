@@ -1,0 +1,78 @@
+/* GameScreen.css */
+.game-screen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #a7e9af, #6dbf63); /* Example background */
+    min-height: 100vh;
+}
+  
+h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+  
+.statements-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+  
+.statement-input-group {
+    display: flex;
+    flex-direction: column;
+}
+  
+textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
+  
+.bug-button {
+    background-color: #ff6b6b; /* Example bug color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+  
+.bug-button:hover {
+    background-color: #e05252;
+}
+  
+.bug-selected textarea {
+    border: 2px solid #ff6b6b; /* Highlight the selected bug */
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+  
+.submit-button {
+    background-color: #5cb85c; /* Example submit color */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.submit-button:hover {
+    background-color: #4cae4c;
+}
+  
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
