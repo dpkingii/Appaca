@@ -50,3 +50,38 @@ margin-bottom: 40px;
   transform: scale(0.95);
   box-shadow: 1px 1px #a4743a;
 }
+
+.title-page-content button:active {
+    transform: scale(0.95);
+    box-shadow: 1px 1px #a4743a;
+  }
+
+.title-image {
+    width: 200px
+}
+
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(-5px, 5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0px, 0px); }
+  }
+  
+  .title-image:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+
+.grass-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+}
+.grass-image2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+}
