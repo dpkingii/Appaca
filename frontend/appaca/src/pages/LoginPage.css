@@ -42,7 +42,7 @@
     background: white;
     appearance: none;
     position: relative;
-    color: white;
+    color: black;
     transition: all .2s ease;
 
     font-family: National Park;
@@ -71,7 +71,7 @@
     border:none;
     margin-bottom:18px;
     font-size: 1em;
-    color:rgb(255, 255, 255);
+    color: white;
     width:400px;
     font-family: National Park;
     font-weight: 600;
