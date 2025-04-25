@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css"
 
 function LoginPage() {
+
+    const navigate = useNavigate();
     
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -12,31 +14,33 @@ function LoginPage() {
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/users/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username: username,    // Replace with the username
-                    email: email, // Replace with the email
-                    password: password, // Replace with the password
-                    role: role   })
-            });
-            if (!response.ok) {
-                throw new Error("Failed to create user.")
-            }
-            const data = await response.json();
-            console.log(`success: ${JSON.stringify(data)}`)
-        } catch (e) {
-            setError("Failed to register new user with given ID")
-            console.error(e)
-        }
+        navigate(`/display/`)
     };
 
     return (
-        <div className="login-container">
-            <h1>🦙 Appaca 🦙</h1>
+        <div>
+            <svg className="bokeh" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10%" cy="85%" r="10%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+                <circle cx="85%" cy="35%" r="15%"/>
+                <circle cx="60%" cy="85%" r="15%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+                <circle cx="35%" cy="25%" r="10%"/>
+                <circle cx="90%" cy="-25%" r="15%"/>
+                <circle cx="-15%" cy="30%" r="15%"/>
+                <circle cx="65%" cy="85%" r="10%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+            </svg>
+
+            <div className = "title">
+                <h1>🦙 Appaca! 🦙</h1>
+            </div>
+
+        <div className="content-container">
+
+            <div className="main-content">
+                <p>Login with your information!</p>
+            </div>
 
             <input
                 onChange={(event) => setUsername(event.target.value)}
@@ -56,7 +60,6 @@ function LoginPage() {
                 className="search"
                 placeholder="Password"
             />
-            <label htmlFor="role">Role:</label>
             <select
                 id="role"
                 value={role}
@@ -69,11 +72,19 @@ function LoginPage() {
                 <option value="director">Director</option>
             </select>
 
-            <button onClick={handleLogin} id="searchBtn">
-                Login
+            <button className="ahhhh" onClick={handleLogin} role="button">
+                <span className="button-shadow"></span>
+                <span className="button-edge"></span>
+                <span className="button-side-edge"></span>
+                <span className="button-front text">
+                    Login
+                </span>
             </button>
 
             {error && <p style={{color: "red"}}>{error}</p>}
+
+        </div>
+
         </div>
     );
 }
