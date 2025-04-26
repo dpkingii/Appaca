@@ -7,14 +7,14 @@
     flex-direction: column;
     height: 100vh;
     color:grey;
+    margin-top:-20px;
 }
 
 .topBar{
-    background: linear-gradient(to bottom right, #a8dadc, #457b9d); /* Apply gradient to the container */
     padding: 1rem;
     border-radius:8px;
     margin-bottom:5px;
-    height:75px;
+    height:200px;
     color:white;
 }
 
@@ -26,13 +26,15 @@
 
     display: flex;
     position: fixed;
-    left: 10vw;
+    left: 17vw;
+    top:1vw;
 }
 
 .topBar h2{
     display: flex;
     position:fixed;
     right:10vw;
+    top:1vw;
 }
 
 .content {
@@ -49,15 +51,18 @@
 }
 
 .sideBar img{
-    height:100px;
-    width:100px;
+    width:200px;
+    margin-top:10px;
+    border-style: solid;
     border-color:black;
+    border-width:3px;
+    border-radius:100px;
 }
 
 .leaderboard{
     background-color:white;
-    margin-left:5px;
-    width: 795px;
+    margin-left:15px;
+    width: 785px;
     padding: 1rem;
     border-radius:8px;
     
@@ -106,3 +111,18 @@
     font-weight:bold;
 }
 
+.box{
+    margin-top:25px;
+    border-radius:8px;
+    background-color: rgb(223, 223, 223);
+    width:85%;
+    justify-self:center;
+    padding:10px;
+}
+
+.box p {
+    justify-self:left;
+    margin-left:30px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin-top:-13px;
+}
