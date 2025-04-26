@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+
+
+.all {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color:grey;
+}
+
+.topBar{
+    background: linear-gradient(to bottom right, #a8dadc, #457b9d); /* Apply gradient to the container */
+    padding: 1rem;
+    border-radius:8px;
+    margin-bottom:5px;
+    height:75px;
+    color:white;
+}
+
+.topBar h1{
+    font-family: Titan One;
+    font-size: 2em;
+    line-height: 1.1;
+    letter-spacing: 0.05rem;
+
+    display: flex;
+    position: fixed;
+    left: 10vw;
+}
+
+.topBar h2{
+    display: flex;
+    position:fixed;
+    right:10vw;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.sideBar{
+    background-color:white;
+    flex: 1;
+    padding: 1rem;
+    width: 200px;
+    border-radius:8px;
+}
+
+.sideBar img{
+    height:100px;
+    width:100px;
+    border-color:black;
+}
+
+.leaderboard{
+    background-color:white;
+    margin-left:5px;
+    width: 795px;
+    padding: 1rem;
+    border-radius:8px;
+    
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    flex-direction: column;
+}
+
+.leaderboard h2{
+    margin-bottom:0px;
+}
+
+.leaderboard-item{
+    flex:1 1 200px;
+    max-width:300px;
+}
+
+.backboard{
+    background-color: rgb(223, 223, 223);
+    width:500px;
+    height:300px;
+    text-align:left;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    align-self: center;
+}
+
+.entry{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0.25rem 1rem;
+}
+.entry p{
+    margin:0;
+    margin-top:7px;
+    padding:10px;
+    font-weight:bold;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.number {
+    font-weight:bold;
+}
+
