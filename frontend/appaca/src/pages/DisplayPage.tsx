@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import "./DisplayPage.css";
+import tempStreakIcon from './Images/tempStreakIcon.jpg';
 
 function DisplayPage() {
     
@@ -9,22 +10,26 @@ function DisplayPage() {
             <div className = "all">
 
                 <div className = "topBar">
-                    <h1>Appaca!</h1>
+                    <h1>🦙 Appaca! 🦙</h1>
                     <h2>@profilename</h2>
                 </div>
 
                 <div className = "content">
                     <div className = "sideBar">
-                        <img src="" alt="Alpaca Streak Icon" />
-                        <h3>Streak: 5</h3>
+                        <div className = "box">
+                            <img src = {tempStreakIcon} alt="Alpaca Streak Icon" />
+                            <h3>Streak: 5</h3>
+                        </div>
 
-                        <h3>Mentor</h3>
-                        <p>insert mentor name</p>
+                        <div className = "box">
+                            <h3>Mentor</h3>
+                            <p>insert mentor name</p>
 
-                        <h3>Group Members</h3>
-                        <p>- @name 1</p>
-                        <p>- @name 2</p>
-                        <p>- @yourname</p>
+                            <h3>Group Members</h3>
+                            <p>- @name 1</p>
+                            <p>- @name 2</p>
+                            <p>- @yourname</p>
+                        </div>
 
                     </div>
                     
