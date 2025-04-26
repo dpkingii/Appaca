@@ -18,60 +18,9 @@ function LandingPage() {
 
     return (
         <div>
-
-            <div className = "content-container">
-                <h1>🦙 Appaca! 🦙</h1>
-
-                <div className="main-content">
-                    <p className="fade-in">Get ready to meet your mentor! 🦙</p>
-
-                    <Link to="/login">
-                        {/* <button className="center"><p>Login or Register</p></button> */}
-
-                        <button className="ahhhh" role="button">
-                        <span className="button-shadow"></span>
-                        <span className="button-edge"></span>
-                        <span className="button-side-edge"></span>
-                        <span className="button-front text">
-                            Login or Register
-                        </span>
-                        </button>
-                    </Link>
-
-                    <Link to="/notFound">
-                        {/* <button className="center"><p>Go to Not Found (placeholder and test)</p></button> */}
-                        <button className="ahhhh" role="button">
-                        <span className="button-shadow"></span>
-                        <span className="button-edge"></span>
-                        <span className="button-side-edge"></span>
-                        <span className="button-front text">
-                            Go to Not Found (placeholder and test)
-                        </span>
-                        </button>
-                    </Link>
-
-                    {/* <button className="center" onClick={fetchHello}><p>Fetch from API</p></button>
-                    {message && <p>{message}</p>} */}
-
-                    <button className="ahhhh" role="button" onClick={fetchHello}>
-                    <span className="button-shadow"></span>
-                    <span className="button-edge"></span>
-                    <span className="button-side-edge"></span>
-                    <span className="button-front text">
-                        Fetch from API
-                    </span>
-                    </button>
-                    {message && <p>{message}</p>}
-
-                    {/* <button className="button-85" role="button">Button 85</button> */}
-
-                </div>
-            </div>
-
-
             <svg className="bokeh" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="10%" cy="85%" r="10%"/>
-                <circle cx="45%" cy="50%" r="10"/>
+                <circle cx="45%" cy="50%" r="10%"/>
                 <circle cx="85%" cy="35%" r="15%"/>
                 <circle cx="60%" cy="85%" r="15%"/>
                 <circle cx="45%" cy="50%" r="10%"/>
@@ -81,6 +30,53 @@ function LandingPage() {
                 <circle cx="65%" cy="85%" r="10%"/>
                 <circle cx="45%" cy="50%" r="10%"/>
             </svg>
+
+            <div className = "title">
+                <h1>🦙 Appaca! 🦙</h1>
+            </div>
+
+            <div className = "content-container">
+                <div className="fade-in">
+
+                <div className="main-content">
+                    <p>Get ready to meet your mentor!</p>
+                </div>
+
+                <Link to="/login">
+                    <button className="ahhhh" role="button">
+                    <span className="button-shadow"></span>
+                    <span className="button-edge"></span>
+                    <span className="button-side-edge"></span>
+                    <span className="button-front text">
+                        Login or Register
+                    </span>
+                    </button>
+                </Link>
+
+                <Link to="/notFound">
+                    <button className="ahhhh" role="button">
+                    <span className="button-shadow"></span>
+                    <span className="button-edge"></span>
+                    <span className="button-side-edge"></span>
+                    <span className="button-front text">
+                        Go to Not Found (placeholder and test)
+                    </span>
+                    </button>
+                </Link>
+
+                <button className="ahhhh" role="button" onClick={fetchHello}>
+                <span className="button-shadow"></span>
+                <span className="button-edge"></span>
+                <span className="button-side-edge"></span>
+                <span className="button-front text">
+                    Fetch from API
+                </span>
+                </button>
+                {message && <p>{message}</p>}
+
+                </div>
+
+            </div>
 
         </div>
     )
