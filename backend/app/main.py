@@ -2,22 +2,10 @@ from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.schema import NewUser
 from app.database import get_db
-from motor.motor_asyncio import AsyncIOMotorClient
 from bson import ObjectId
-from dotenv import load_dotenv
-import os 
-
-#loading environmental variables
-load_dotenv()
-MONGODB_URI = os.getenv("MONGODB_URI")
-DB_NAME = "Appaca"
 
 # models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
-
-#connect to database at global context
-client = AsyncIOMotorClient(MONGODB_URI)
-db = client[DB_NAME]
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,6 +15,15 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+@app.on_event("startup")
+async def startup_db():
+    try:
+        # Try connecting to MongoDB Atlas
+        db = get_db()  # You can also try client.appaca_db to be specific
+        print("Connected to MongoDB Atlas")
+    except Exception as e:
+        print("Failed to connect to MongoDB Atlas", e)
+        
 @app.get("/")
 async def main(request: Request):
     print(f"Request headers: {request.headers}")

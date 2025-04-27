@@ -18,10 +18,12 @@ function LoginPage() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username: username,    // Replace with the username
-                    email: email, // Replace with the email
-                    password: password, // Replace with the password
-                    role: role   })
+                body: JSON.stringify({ 
+                    username: username,     // Replace with the username
+                    email: email,           // Replace with the email
+                    password: password,     // Replace with the password
+                    role: role              // Replace with the role
+                })
             });
             if (!response.ok) {
                 throw new Error("Failed to create user.")
