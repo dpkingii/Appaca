@@ -14,15 +14,6 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
-
-@app.on_event("startup")
-async def startup_db():
-    try:
-        # Try connecting to MongoDB Atlas
-        db = get_db()  # You can also try client.appaca_db to be specific
-        print("Connected to MongoDB Atlas")
-    except Exception as e:
-        print("Failed to connect to MongoDB Atlas", e)
         
 @app.get("/")
 async def main(request: Request):
@@ -49,28 +40,14 @@ async def register_user(user: NewUser, db = Depends(get_db)):
 
     return {"id": str(result.inserted_id)}
 
-@app.post("/test_insert/")
-async def test_insert():
-    # Sample data to insert into MongoDB
-    test_data = {
-        "username": "testuser",
-        "email": "testuser@example.com",
-        "role": "admin"
-    }
-
-    # Insert the data into the "users" collection
-    result = await db.users.insert_one(test_data)
-
-    # Return the ID of the inserted document
-    return {"inserted_id": str(result.inserted_id)}
-
-@app.get("/test_get/")
-async def test_get():
-    # Find the first user in the "users" collection
-    user = await db.users.find_one({"username": "testuser"})
+@app.get("/users/{username}")
+async def get_user(username: str, db = Depends(get_db)):
+    #Find user by username
+    user = await db.users.find_one({"username": username})
 
     if user:
-        # Return the user data
         return {"username": user["username"], "email": user["email"], "role": user["role"]}
     else:
+        # If the user is not found, return a 404 error
         raise HTTPException(status_code=404, detail="User not found")
+
