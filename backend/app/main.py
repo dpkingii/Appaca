@@ -83,9 +83,16 @@ async def get_messages(username: str, db = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    sent_messages = await db.messages.find({"sender_id": str(user["_id"])}).to_list(length=100)
+    sender_object_id = user["_id"]
+
+    sent_messages = await db.messages.find({"sender_id": str(sender_object_id)}).to_list(length=100)
 
     if not sent_messages:
         raise HTTPException(status_code=404, detail="No sent messages found")
+    
+    for message in sent_messages:
+        message["_id"] = str(message["_id"])  # Convert the message _id
+        message["sender_id"] = str(message["sender_id"])  # Convert sender_id
+        message["recipient_id"] = str(message["recipient_id"])  # Convert recipient_id
     
     return sent_messages
