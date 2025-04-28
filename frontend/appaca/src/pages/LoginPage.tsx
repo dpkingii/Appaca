@@ -14,7 +14,30 @@ function LoginPage() {
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
-        navigate(`/display/`)
+        try {
+            const response = await fetch("http://127.0.0.1:8000/users/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    username: username,     // Replace with the username
+                    email: email,           // Replace with the email
+                    password: password,     // Replace with the password
+                    role: role              // Replace with the role
+                })
+            });
+            if (!response.ok) {
+                throw new Error("Failed to create user.")
+            }
+
+            const data = await response.json();
+            console.log(`success: ${JSON.stringify(data)}`)
+            navigate(`/display/`)
+        } catch (e) {
+            setError("Failed to register new user with given ID")
+            console.error(e)
+        }
     };
 
     return (
