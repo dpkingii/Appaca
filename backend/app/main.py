@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.schema import NewUser
+from app.schema import Message
 from app.database import get_db
 from bson import ObjectId
+from datetime import datetime
 
 # models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -22,6 +24,7 @@ async def main(request: Request):
 
 @app.post("/users/")
 async def register_user(user: NewUser, db = Depends(get_db)):
+
     # Check for existing user
     existing = await db.users.find_one({
         "$or": [
@@ -51,3 +54,38 @@ async def get_user(username: str, db = Depends(get_db)):
         # If the user is not found, return a 404 error
         raise HTTPException(status_code=404, detail="User not found")
 
+@app.post("/messages/")
+async def send_message(message: Message, db = Depends(get_db)):
+
+    sender = await db.users.find_one({"username": message.sender_username})
+    if not sender:
+        raise HTTPException(status_code=404, detail="Sender not found")
+
+    recipient = await db.users.find_one({"username": message.recipient_username})
+    if not recipient:
+        raise HTTPException(status_code=404, detail="Sender not found")
+    
+    message_data = {
+        "sender_id": str(sender["_id"]),
+        "recipient_id": str(recipient["_id"]),
+        "content": message.content,
+        "timestamp": message.timestamp or datetime.now()  
+    }
+  
+    result = await db.messages.insert_one(message_data)
+
+    return {"message_id": str(result.inserted_id), "status": "Message sent successfully"}
+
+@app.get("/messages/{username}")
+async def get_messages(username: str, db = Depends(get_db)):
+    user = await db.users.find_one({"username": username})
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    sent_messages = await db.messages.find({"sender_id": str(user["_id"])}).to_list(length=100)
+
+    if not sent_messages:
+        raise HTTPException(status_code=404, detail="No sent messages found")
+    
+    return sent_messages
