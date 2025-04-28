@@ -12,3 +12,7 @@ class Message(BaseModel):
     recipient_username: str
     content: str
     timestamp: datetime = None
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
