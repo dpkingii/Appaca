@@ -28,6 +28,14 @@ function GuessingScreen() {
 
   return (
     <div className="guessing-screen-container">
+      <div className="guess-image-content">
+        <img 
+          src="https://png.pngtree.com/png-vector/20220713/ourmid/pngtree-insect-ladybug-cartoon-bugs-character-png-image_5932864.png" 
+          alt="Cartoon bug graphic" 
+          className="guess-image"
+        />
+      </div>
+
       <h1>Which Statement is the Bug?</h1>
       <ul className="statement-list">
         {statements.map((statement, index) => (

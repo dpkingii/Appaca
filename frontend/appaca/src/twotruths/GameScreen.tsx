@@ -33,17 +33,23 @@ function GameScreen() {
           bug: statements[bugIndex],
         };
     
-        // In a real application, you would send this 'gameData' to your backend
+        
         console.log('Game Data to Backend:', gameData);
     
-        // Example of navigation after submission (if needed)
-        // navigate('/waiting-room');
+
       };
 
 
   return (
     <div className="game-screen-container">
       <h1>Tell Us Two Truths and a Bug!</h1>
+      <div className="game-screen-image">
+                  <img 
+                    src="https://png.pngtree.com/png-vector/20220713/ourmid/pngtree-insect-ladybug-cartoon-bugs-character-png-image_5932864.png" 
+                    alt="Cartoon bug graphic" 
+                    className="game-screen-image"
+                  />
+    </div>
       <div className="statements-container">
         {statements.map((statement, index) => (
           <div key={index} className={`statement-input-group ${bugIndex === index ? 'bug-selected' : ''}`}>
