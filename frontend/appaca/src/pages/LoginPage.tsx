@@ -8,35 +8,34 @@ function LoginPage() {
     const navigate = useNavigate();
     
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/users/", {
-                method: "POST",
+            const response = await fetch('http://127.0.0.1:8000/login/', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',  // Ensure the Content-Type is application/json
                 },
-                body: JSON.stringify({ 
-                    username: username,     // Replace with the username
-                    email: email,           // Replace with the email
-                    password: password,     // Replace with the password
-                    role: role              // Replace with the role
+                body: JSON.stringify({
+                    username: username,   // Ensure username is a string
+                    password: password    // Ensure password is a string
                 })
             });
+    
             if (!response.ok) {
-                throw new Error("Failed to create user.")
+                const errorData = await response.json();  // Get error response body
+                console.error("Error details:", errorData); // Log the error
+                throw new Error(errorData.detail || 'Login Failed');
             }
-
+    
             const data = await response.json();
-            console.log(`success: ${JSON.stringify(data)}`)
-            navigate(`/display/`)
+            console.log("Login successful:", data);
+            navigate('/display');
         } catch (e) {
-            setError("Failed to register new user with given ID")
-            console.error(e)
+            console.error("Error fetching user:", e);
+            setError(e.message);  // Display the error message in the UI
         }
     };
 
@@ -71,29 +70,13 @@ function LoginPage() {
                 className="search"
                 placeholder="Username"
             />
-            <input
-                onChange={(event) => setEmail(event.target.value)}
-                type="email"
-                className="search"
-                placeholder="Email"
-            />
+
             <input
                 onChange={(event) => setPassword(event.target.value)}
                 type="password"
                 className="search"
                 placeholder="Password"
             />
-            <select
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="search"
-            >
-                <option value="">Select Role</option>
-                <option value="student">Student</option>
-                <option value="mentor">Mentor</option>
-                <option value="director">Director</option>
-            </select>
 
             <button className="ahhhh" onClick={handleLogin} role="button">
                 <span className="button-shadow"></span>

@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap');
+
+/* .login-container {
+    background-color: #f1faee;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 400px;
+    width: 90%;
+    background: linear-gradient(to bottom right, #a8dadc, #457b9d);
+    min-height: 25vh;
+    justify-content: center;
+  } */
+
+/* .content-container {
+    margin-top: 7%;
+} */
+  
+
+.content-container h1 {
+    color: #ffffff;
+    font-family:Titan One;
+    margin-bottom: 20px;
+    font-size: 2em;
+    letter-spacing: 0.05rem;
+}
+
+.content-container input.search {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    width: 375px;
+
+    box-shadow: inset rgb(184, 184, 184) 0 0 0 2.5px;
+    border: 0;
+    background: white;
+    appearance: none;
+    position: relative;
+    color: black;
+    transition: all .2s ease;
+
+    font-family: National Park;
+    font-weight: 600;
+}
+.content-container input.search:hover{
+    box-shadow: 0 0 0 0 #fff inset, #3d81ff 0 0 0 3.5px;
+    background: rgb(0, 4, 24);
+}
+.content-container input.search:focus{
+    background: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0 #fff inset, #0059ff 0 0 0 3.5px;
+    color: black;
+}
+
+/* .content-container input.search:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(66, 153, 225, 0.5);
+} */
+
+.content-container select{
+    box-shadow: 0 0 0 0 white inset, #6098ff 0 0 0 2px;
+    padding: 12px;
+    border-radius: 8px;
+    border:none;
+    margin-bottom:18px;
+    font-size: 1em;
+    color: white;
+    width:400px;
+    font-family: National Park;
+    font-weight: 600;
+    /* background: rgb(0, 9, 49); */
+    background: linear-gradient(to bottom, rgb(0, 11, 59), rgb(0, 4, 20));
+    text-align: left;
+}
+
+.content-container select:hover{
+    box-shadow: 0 0 0 0 #fff inset, #3d81ff 0 0 0 4px;
+    transition: all .2s ease;
+    background: rgb(0, 4, 24);
+}
+
+.content-container select:focus {
+    /* background: #fff; */
+    outline: 0;
+    box-shadow: 0 0 0 0 #fff inset, #0059ff 0 0 0 4px;
+    color: black;
+    background: linear-gradient(to bottom, white, rgb(138, 138, 138));
+}
+
+.content-container select option {
+    font-family: National Park;
+    font-weight: 600;
+}

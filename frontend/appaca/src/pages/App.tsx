@@ -4,6 +4,7 @@ import LandingPage from './LandingPage'
 import LoginPage from './LoginPage'
 import NotFound from './NotFound'
 import DisplayPage from './DisplayPage'
+import SignupPage from './SignupPage'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/display" element={<DisplayPage/>} />
       <Route path="/notFound" element={<NotFound/>}/>
     </Routes>
