@@ -32,8 +32,9 @@ function LoginPage() {
             }
 
             const data = await response.json();
+            setUsername(data.username);
             console.log("Login successful:", data);
-            navigate('/display');
+            navigate('/display', { state: { username }});
         } catch (e){
             console.error("Error fetching user:", e);
             setError(e.message || "Failed to fetch user. Please try again.");

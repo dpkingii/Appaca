@@ -1,17 +1,45 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DisplayPage.css";
+import { useLocation } from 'react-router-dom';
 import tempStreakIcon from './Images/tempStreakIcon.jpg';
 
 function DisplayPage() {
-    
+
+    const location = useLocation();
+    const username = location.state?.username;
+
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/users/${username}`);
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.detail || "Failed to fetch user");
+                }
+
+                const data = await response.json();
+                setUserData(data);
+            } catch (e) {
+                console.error("Error fetching user:", e);
+                setError(e.message);
+            }
+        };
+
+        if (username) {
+            fetchUser();
+        }
+    }, [username]);
+
     return (
         <>
             <div className = "all">
 
                 <div className = "topBar">
                     <h1>🦙 Appaca! 🦙</h1>
-                    <h2>@profilename</h2>
+                    <h2>@{userData?.username || "Loading..."}</h2>
                 </div>
 
                 <div className = "content">
