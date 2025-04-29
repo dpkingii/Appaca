@@ -5,6 +5,8 @@ import LoginPage from './LoginPage'
 import NotFound from './NotFound'
 import DisplayPage from './DisplayPage'
 import SignupPage from './SignupPage'
+import ChatPage from './MentorChat'
+import Match from './Match'
 
 function App() {
 
@@ -15,6 +17,8 @@ function App() {
       <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/display" element={<DisplayPage/>} />
       <Route path="/notFound" element={<NotFound/>}/>
+      <Route path="/match" element={<Match/>}/>
+      <Route path="/chat" element={<ChatPage/>}/>
     </Routes>
   )
 }
