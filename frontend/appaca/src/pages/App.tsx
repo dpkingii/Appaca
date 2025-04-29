@@ -6,6 +6,7 @@ import NotFound from './NotFound'
 import DisplayPage from './DisplayPage'
 import TitlePage from '../twotruths/TitlePage'
 import GameScreen from '../twotruths/GameScreen';
+import GuessingScreen from '../twotruths/GuessingScreen';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Route path="/display" element={<DisplayPage/>} />
       <Route path="/notFound" element={<NotFound/>}/>
       <Route path="/twoTruths" element={<TitlePage/>}/>
-      <Route path="/game" element={<GameScreen />} />
+       {/* <Route path="/game" element={<GameScreen />} />  */}
+      <Route path="/game" element={<GuessingScreen />} /> 
     </Routes>
   );
 }
