@@ -48,7 +48,18 @@ function LandingPage() {
                     <span className="button-edge"></span>
                     <span className="button-side-edge"></span>
                     <span className="button-front text">
-                        Login or Register
+                        Login
+                    </span>
+                    </button>
+                </Link>
+
+                <Link to="/signup">
+                    <button className="ahhhh" role="button">
+                    <span className="button-shadow"></span>
+                    <span className="button-edge"></span>
+                    <span className="button-side-edge"></span>
+                    <span className="button-front text">
+                        Register
                     </span>
                     </button>
                 </Link>
