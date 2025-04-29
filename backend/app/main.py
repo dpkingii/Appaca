@@ -60,10 +60,10 @@ async def login(login_data: LoginRequest, db = Depends(get_db)):
     user = await db.users.find_one({"username": login_data.username})
 
     if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="User not found, did you put in the right username?")
 
     if user["password"] != login_data.password:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")    
+        raise HTTPException(status_code=400, detail="Incorrect password")    
     
     return {"message": "Login successful", "username": user["username"], "role": "student"}
 

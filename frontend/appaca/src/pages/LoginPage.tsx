@@ -12,31 +12,33 @@ function LoginPage() {
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
+
         try {
-            const response = await fetch('http://127.0.0.1:8000/login/', {
+            const response = await fetch(`http://127.0.0.1:8000/login/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',  // Ensure the Content-Type is application/json
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: username,   // Ensure username is a string
-                    password: password    // Ensure password is a string
+                    username: username,   // Use the state value for the username
+                    password: password    // Use the state value for the password
                 })
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();  // Get error response body
-                console.error("Error details:", errorData); // Log the error
-                throw new Error(errorData.detail || 'Login Failed');
+            })
+
+            if(!response.ok){
+                const errorData = await response.json();
+                console.error("Error response:", errorData);
+                throw new Error(errorData.detail || "Login failed. Please try again.");
             }
-    
+
             const data = await response.json();
             console.log("Login successful:", data);
             navigate('/display');
-        } catch (e) {
+        } catch (e){
             console.error("Error fetching user:", e);
-            setError(e.message);  // Display the error message in the UI
+            setError(e.message || "Failed to fetch user. Please try again.");
         }
+        
     };
 
     return (
