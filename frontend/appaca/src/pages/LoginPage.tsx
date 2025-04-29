@@ -34,7 +34,8 @@ function LoginPage() {
             const data = await response.json();
             console.log("Login successful:", data);
             navigate('/display');
-        } catch (e){
+        } catch (e: any)
+        {
             console.error("Error fetching user:", e);
             setError(e.message || "Failed to fetch user. Please try again.");
         }
