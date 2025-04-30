@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
+import video from './Images/testVideo.mp4';
 
 function LandingPage() {
     const [message, setMessage] = useState("")
@@ -34,10 +35,15 @@ function LandingPage() {
             <div className = "title">
                 <h1>🦙 Appaca! 🦙</h1>
             </div>
+            
+            <div className = "video">
+                <video id="myVideo" autoPlay muted playsInline height="400px">
+                    <source src={video} type="video/mp4" />
+                </video>
+            </div>
 
             <div className = "content-container">
                 <div className="fade-in">
-
                 <div className="main-content">
                     <p>Get ready to meet your mentor!</p>
                 </div>
@@ -64,7 +70,7 @@ function LandingPage() {
                     </button>
                 </Link>
 
-                <Link to="/notFound">
+                <Link to="/notfound">
                     <button className="ahhhh" role="button">
                     <span className="button-shadow"></span>
                     <span className="button-edge"></span>

@@ -1,40 +1,44 @@
 import React from 'react'
 import { useState } from "react";
 import "./DisplayPage.css";
+import { useNavigate } from 'react-router-dom'
 import sad from './Images/sadAlpaca.png';
 import angry from './Images/angryAlpaca.png';
 import neutral from './Images/neutralAlpaca.png';
 import happy from './Images/happyAlpaca.png';
 
+
 function DisplayPage() {
-    // TEMPORARY NEEDS DATA
-    let streak = 20;
-    let nameList: string[] = ["name1", "name2", "name3"];
-    let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
-    let leaderboardNum: number[] = [55, 40, 34,22,8];
+     // TEMPORARY NEEDS DATA
+     let streak = 20;
+     let nameList: string[] = ["name1", "name2", "name3"];
+     let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
+     let leaderboardNum: number[] = [55, 40, 34,22,8];
+ 
+     // changing the alpaca depending on the streak number
+     let imageName: string | undefined;
+     if(streak < 7){
+         imageName = sad;
+     }
+     else if(streak < 14){
+         imageName = angry;
+     }
+     else if(streak < 21){
+         imageName = neutral;
+     }
+     else{
+         imageName = happy;
+     }
+ 
+     // Create Name List
+     let groupList = "";
+     for(let i = 0;i<nameList.length;i++){
+         groupList += "@"+nameList[i]+", ";
+     }
+     groupList = groupList.substring(0,groupList.length - 2);
 
-    // changing the alpaca depending on the streak number
-    let imageName;
-    if(streak < 7){
-        imageName = sad;
-    }
-    else if(streak < 14){
-        imageName = angry;
-    }
-    else if(streak < 21){
-        imageName = neutral;
-    }
-    else{
-        imageName = happy;
-    }
-
-    // Create Name List
-    let groupList = "";
-    for(let i = 0;i<nameList.length;i++){
-        groupList += "@"+nameList[i]+", ";
-    }
-    groupList = groupList.substring(0,groupList.length - 2);
-
+    const navigate = useNavigate();
+    const handleLogin = async()=> { navigate('/twoTruths')};
     return (
         <>
             <div className = "all">
@@ -77,14 +81,25 @@ function DisplayPage() {
         
                             </div>
 
+                            <h3>Games</h3>
+                            <div className = "games">
+                                <button onClick = {handleLogin}id = "searchBtn"><p> Two Truth, One Bug </p></button>
+                                <button><p> [Code]DLE </p></button>
+                                <button><p> Connections </p></button>
+                            </div>
+
                         </div>
+
+                        
                     </div>
+                    
 
                 </div>
 
             </div>
         </>
     )
+
 }
 
-export default DisplayPage;
+export default DisplayPage
