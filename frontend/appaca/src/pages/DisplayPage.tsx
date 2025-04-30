@@ -37,6 +37,8 @@ function DisplayPage() {
      }
      groupList = groupList.substring(0,groupList.length - 2);
 
+
+
     const navigate = useNavigate();
     const handleLogin = async()=> { navigate('/twoTruths')};
     return (
@@ -97,6 +99,9 @@ function DisplayPage() {
                 </div>
 
             </div>
+            <h1>DisplayPage</h1>
+                <button onClick = {handleLogin}
+                id = "searchBtn"> Two Truth </button>
         </>
     )
 

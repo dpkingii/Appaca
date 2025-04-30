@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.guessing-screen-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #a7e9af, #6dbf63);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fredoka One', cursive;
+}
+
+.guessing-screen-container h1 {
+  font-size: 3rem;
+  color: #5d3a00;
+  text-shadow: 2px 2px #a4743a;
+  margin-bottom: 40px;
+}
+
+.statement-list {
+  list-style-type: none;
+  padding: 0;
+  width: 90%;
+  max-width: 600px;
+}
+
+.statement-option {
+
+  background-color: #a4743a;
+  color: #ddd;
+  font-size: 1.25rem;
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin: 15px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.statement-option:hover {
+  background-color: #5d3a00;
+  transform: scale(1.03);
+}
+
+.guess-image {
+  width: 150px;
+}
+
+@keyframes shake {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(-5px, 5px); }
+  50% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, 5px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+.guess-image:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
