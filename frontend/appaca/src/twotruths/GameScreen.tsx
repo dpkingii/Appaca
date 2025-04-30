@@ -35,8 +35,7 @@ function GameScreen() {
     
         
         console.log('Game Data to Backend:', gameData);
-    
-
+        navigate('/display')
       };
 
 
