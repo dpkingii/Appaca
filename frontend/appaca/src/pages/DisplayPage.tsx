@@ -2,9 +2,12 @@ import React from 'react'
 import { useState } from "react";
 import "./DisplayPage.css";
 import tempStreakIcon from './Images/tempStreakIcon.jpg';
+import { useNavigate } from 'react-router-dom'
+
 
 function DisplayPage() {
-    
+    const navigate = useNavigate();
+    const handleLogin = async()=> { navigate('/twoTruths')};
     return (
         <>
             <div className = "all">
@@ -54,6 +57,9 @@ function DisplayPage() {
                 </div>
 
             </div>
+            <h1>DisplayPage</h1>
+                <button onClick = {handleLogin}
+                id = "searchBtn"> Two Truth </button>
         </>
     )
 }
