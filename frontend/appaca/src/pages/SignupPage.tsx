@@ -35,7 +35,7 @@ function SignupPage() {
                 let error_message = "";
     
                 // If validation errors are returned, iterate over the details
-                if (errorData.detail) {
+                if (!(errorData.detail == "Username or email already exists.")) {
                     // Create an error message based on specific validation failures
                     errorData.detail.forEach(err => {
                         if (err.msg.includes("Username")) {
@@ -48,6 +48,8 @@ function SignupPage() {
                             error_message += "Password must be at least 6 characters long.\n";
                         }
                     });
+                } else {
+                    error_message += "Username or email already exists.";
                 }
     
                 if (error_message) {
