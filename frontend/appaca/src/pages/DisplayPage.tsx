@@ -1,10 +1,40 @@
 import React from 'react'
 import { useState } from "react";
 import "./DisplayPage.css";
-import tempStreakIcon from './Images/tempStreakIcon.jpg';
+import sad from './Images/sadAlpaca.png';
+import angry from './Images/angryAlpaca.png';
+import neutral from './Images/neutralAlpaca.png';
+import happy from './Images/happyAlpaca.png';
 
 function DisplayPage() {
-    
+    // TEMPORARY NEEDS DATA
+    let streak = 20;
+    let nameList: string[] = ["name1", "name2", "name3"];
+    let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
+    let leaderboardNum: number[] = [55, 40, 34,22,8];
+
+    // changing the alpaca depending on the streak number
+    let imageName;
+    if(streak < 7){
+        imageName = sad;
+    }
+    else if(streak < 14){
+        imageName = angry;
+    }
+    else if(streak < 21){
+        imageName = neutral;
+    }
+    else{
+        imageName = happy;
+    }
+
+    // Create Name List
+    let groupList = "";
+    for(let i = 0;i<nameList.length;i++){
+        groupList += "@"+nameList[i]+", ";
+    }
+    groupList = groupList.substring(0,groupList.length - 2);
+
     return (
         <>
             <div className = "all">
@@ -17,8 +47,8 @@ function DisplayPage() {
                 <div className = "content">
                     <div className = "sideBar">
                         <div className = "box">
-                            <img src = {tempStreakIcon} alt="Alpaca Streak Icon" />
-                            <h3>Streak: 5</h3>
+                            <img src = {imageName} alt="Alpaca Streak Icon" />
+                            <h3>Streak: {streak}</h3>
                         </div>
 
                         <div className = "box">
@@ -26,9 +56,9 @@ function DisplayPage() {
                             <p>insert mentor name</p>
 
                             <h3>Group Members</h3>
-                            <p>- @name 1</p>
-                            <p>- @name 2</p>
-                            <p>- @yourname</p>
+                            <p>{groupList}</p>
+                            
+
                         </div>
 
                     </div>
@@ -39,16 +69,15 @@ function DisplayPage() {
 
                             <div className = "board">
                                 
-                                <div className = "entry"> <p>01) @name</p> <div className = "number">88</div> </div>
-                                <div className = "entry"> <p>02) @name</p> <div className = "number">79</div> </div>
-                                <div className = "entry"> <p>03) @name</p> <div className = "number">60</div> </div>
-                                <div className = "entry"> <p>04) @name</p> <div className = "number">43</div> </div>
-                                <div className = "entry"> <p>05) @name</p> <div className = "number">08</div> </div>
+                                <div className = "entry"> <p>01) @{leaderboardList[0]}</p> <div className = "number">{leaderboardNum[0]}</div> </div>
+                                <div className = "entry"> <p>02) @{leaderboardList[1]}</p> <div className = "number">{leaderboardNum[1]}</div> </div>
+                                <div className = "entry"> <p>03) @{leaderboardList[2]}</p> <div className = "number">{leaderboardNum[2]}</div> </div>
+                                <div className = "entry"> <p>04) @{leaderboardList[3]}</p> <div className = "number">{leaderboardNum[3]}</div> </div>
+                                <div className = "entry"> <p>05) @{leaderboardList[4]}</p> <div className = "number">{leaderboardNum[4]}</div> </div>
         
                             </div>
 
                         </div>
-                        <p>Your Place: XX</p>
                     </div>
 
                 </div>
