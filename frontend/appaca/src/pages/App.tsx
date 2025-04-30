@@ -7,9 +7,11 @@ import DisplayPage from './DisplayPage'
 import SignupPage from './SignupPage'
 import ChatPage from './MentorChat'
 import Match from './Match'
+import TitlePage from '../twotruths/TitlePage'
+// import GameScreen from '../twotruths/GameScreen';
+import GuessingScreen from '../twotruths/GuessingScreen';
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage/>}/>
@@ -19,8 +21,11 @@ function App() {
       <Route path="/notFound" element={<NotFound/>}/>
       <Route path="/match" element={<Match/>}/>
       <Route path="/chat" element={<ChatPage/>}/>
+      <Route path="/twoTruths" element={<TitlePage/>}/>
+       {/* <Route path="/game" element={<GameScreen />} />  */}
+      <Route path="/game" element={<GuessingScreen />} /> 
     </Routes>
-  )
+  );
 }
 
 export default App
