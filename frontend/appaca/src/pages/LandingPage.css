@@ -80,6 +80,21 @@ body {
     transform: rotate(360deg);
   }
 }
+.video{
+  height:400px;
+  width:700px;
+  position:fixed;
+  left:0;
+}
+
+video{
+  position:fixed;
+  left:0;
+}
+
+#root{
+  padding-left:0;
+}
 
 .content-container {
   position: relative;
