@@ -1,27 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&display=swap');
 
-/* .login-container {
-    background-color: #f1faee;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    max-width: 400px;
-    width: 90%;
-    background: linear-gradient(to bottom right, #a8dadc, #457b9d);
-    min-height: 25vh;
-    justify-content: center;
-  } */
-
-/* .content-container {
-    margin-top: 7%;
-} */
-  
-
 .content-container h1 {
     color: #ffffff;
     font-family:Titan One;
@@ -51,6 +30,7 @@
 .content-container input.search:hover{
     box-shadow: 0 0 0 0 #fff inset, #3d81ff 0 0 0 3.5px;
     background: rgb(0, 4, 24);
+    color: white;
 }
 .content-container input.search:focus{
     background: #fff;
