@@ -40,7 +40,7 @@ function SignupPage() {
                 // If validation errors are returned, iterate over the details
                 if (!(errorData.detail == "Username or email already exists.")) {
                     // Create an error message based on specific validation failures
-                    errorData.detail.forEach(err => {
+                    errorData.detail.forEach((err: { msg: string | string[]; }) => { //to get the typescript compiler to STFU about types
                         if (err.msg.includes("Username")) {
                             error_message += "Username must be at least 3 characters long.\n";
                         }
@@ -71,7 +71,7 @@ function SignupPage() {
             } else {
                 navigate(`/match/`);  // Redirect to matching after successful signup
             }
-        } catch (e) {
+        } catch (e: any) {
             setError(e.message);  // Show the error message from the backen
             console.error("Error during signup:", e);
         }
