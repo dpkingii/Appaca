@@ -12,27 +12,23 @@ import happy from './Images/happyAlpaca.png';
 function DisplayPage() {
      // TEMPORARY NEEDS DATA
      const { user } = useUser();
-
-     const[streak,setStreak] = useState(6);
      const [matched, setMatched] = useState(false);
     
      const [nameList, setNameList] = useState<string[]>([]);
      const [mentorName, setMentorName] = useState<string>("");
 
      const [topMentors, setTopMentors] = useState<{ username: string, streak: number }[]>([]);
-
-     let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
-     let leaderboardNum: number[] = [55, 40, 34,22,8];
  
      // changing the alpaca depending on the streak number
      let imageName: string | undefined;
-     if(streak < 7){
+     if(user == undefined) {
+     } else if(user?.streak < 7){
          imageName = sad;
      }
-     else if(streak < 14){
+     else if(user?.streak < 14){
          imageName = angry;
      }
-     else if(streak < 21){
+     else if(user?.streak < 21){
          imageName = neutral;
      }
      else{
@@ -43,9 +39,12 @@ function DisplayPage() {
      const groupList = nameList.map(name => "@" + name).join(", ");
 
     const navigate = useNavigate();
-    const handleTwoTruth = ()=> {
-        setStreak(streak+1)
-        navigate('/twoTruths')
+    const handleTwoTruth = () => {
+        if (user?.role === "student") {
+            navigate("/guess");
+        } else if (user?.role === "mentor") {
+            navigate("/twoTruths");
+        } 
     };
 
     useEffect(() => {
@@ -126,7 +125,7 @@ function DisplayPage() {
                     <div className = "sideBar">
                         <div className = "box">
                             <img src = {imageName} alt="Alpaca Streak Icon" />
-                            <h3>Streak: {streak}</h3>
+                            <h3>Streak: {user?.streak}</h3>
                         </div>
 
                         {(user?.role === "student" || user?.role === "mentor") && (
@@ -161,7 +160,7 @@ function DisplayPage() {
                             {topMentors.map((mentor, index) => (
                                 <div className="entry" key={mentor.username}>
                                     <p>{String(index + 1).padStart(2, '0')}) @{mentor.username}</p>
-                                    <div className="number">{mentor.streak}</div>
+                                    <div className="number">🔥{mentor.streak}</div>
                                 </div>
                             ))}
         

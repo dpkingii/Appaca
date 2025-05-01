@@ -4,7 +4,7 @@ import React, { createContext, useState, useContext, useEffect, ReactNode } from
 interface User {
   username: string;
   role: string;
-  streak: IntegerType;
+  streak: number;
 }
 
 interface UserContextType {
