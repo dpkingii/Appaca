@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useUser } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 //TODO: do processing to determine the values of roleToMatch, roleText.
 //SHOULD BE STORING IT SOMEWHERE SO WHEN WE GO TO THIS PAGE WE KNOW WHAT TO RENDER
 
 function Match() {
+    const { user } = useUser();
     const [roleToMatch, setRole] = useState("");
     const [roleText, setRoleText] = useState('');
     useEffect(() => {
-        setRole('student');
-        setRoleText('able to teach?');
+        if(!user){
+            console.log("oops");
+        } else {
+            setRole(user.username);
+            if(user.role == 'student'){
+                setRole('mentor');
+            } else {
+                setRole('student');
+            }
+            if(user.username == 'student'){
+                setRoleText("What do you want to learn?")
+            } else {
+                setRoleText("What are you able to teach?");
+            }
+        }
     }, [])
 
     const handleForms = async () => {
@@ -30,7 +46,7 @@ function Match() {
             </svg>
             
             <div className="content-container">
-                <p>What are you {roleText}</p>
+                <p>{roleText}</p>
                 <form method="POST">
                     <div style={{ display: "flexbox", margin: "20px" }}>
                         <label htmlFor="swe">SWE (Software Engineering)</label>
