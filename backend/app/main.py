@@ -137,7 +137,7 @@ async def submit_form(form: MatchingForm, db=Depends(get_db)):
         "topics": form.topics
     }
 
-@app.post("/match")
+@app.post("/match/")
 async def match_users(db = Depends(get_db)):
     forms = await db.forms.find().to_list(length=None)
 
@@ -186,3 +186,20 @@ async def match_users(db = Depends(get_db)):
             "students": g["students"]
         } for g in matched_groups
     ]}
+
+@app.get("/groups/{username}")
+async def get_groups(username: str, db = Depends(get_db)):
+    group = await db.groups.find_one({
+        "$or": [
+            {"mentor": username},
+            {"students": username}
+        ]
+    })
+
+    if not group:
+        raise HTTPException(status_code=404, detail="No matches found for this user")
+
+    return {
+        "mentor": group["mentor"],
+        "students": group["students"]
+    }

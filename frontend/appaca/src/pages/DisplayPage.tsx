@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useUser } from "./UserContext";
 import "./DisplayPage.css";
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
 import sad from './Images/sadAlpaca.png';
 import angry from './Images/angryAlpaca.png';
 import neutral from './Images/neutralAlpaca.png';
@@ -13,8 +14,10 @@ function DisplayPage() {
      const { user } = useUser();
 
      const[streak,setStreak] = useState(6)
+    
+     const [nameList, setNameList] = useState<string[]>([]);
+     const [mentorName, setMentorName] = useState<string>("");
 
-     let nameList: string[] = ["name1", "name2", "name3"];
      let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
      let leaderboardNum: number[] = [55, 40, 34,22,8];
  
@@ -34,11 +37,7 @@ function DisplayPage() {
      }
  
      // Create Name List
-     let groupList = "";
-     for(let i = 0;i<nameList.length;i++){
-         groupList += "@"+nameList[i]+", ";
-     }
-     groupList = groupList.substring(0,groupList.length - 2);
+     const groupList = nameList.map(name => "@" + name).join(", ");
 
     const navigate = useNavigate();
     const handleTwoTruth = ()=> {
@@ -46,13 +45,31 @@ function DisplayPage() {
         navigate('/twoTruths')
     };
 
+    useEffect(() => {
+        if (user?.username) {
+          getGroups();
+        }
+      }, [user]);
+      
     const match = async () => {
         try {
-          const res = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
-          const data = await res.json();
+          const response = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
+          const data = await response.json();
           console.log("Matching result:", data);
         } catch (error) {
           console.error("Error matching:", error);
+        }
+    };
+
+    const getGroups = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/groups/${user?.username}`);
+            const group = await response.json();
+            console.log("Group:", group);  
+            setMentorName(group.mentor);
+            setNameList(group.students);
+        } catch (error) {
+            console.error("Error fetching group:", error);
         }
     };
 
@@ -75,7 +92,7 @@ function DisplayPage() {
                         {(user?.role === "student" || user?.role === "mentor") && (
                         <div className="box">
                             <h3>Mentor</h3>
-                            <p>insert mentor name</p>
+                            <p>{mentorName}</p>
 
                             <h3>Group Members</h3>
                             <p>{groupList}</p>
