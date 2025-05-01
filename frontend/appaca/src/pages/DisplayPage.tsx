@@ -46,7 +46,7 @@ function DisplayPage() {
     };
 
     useEffect(() => {
-        if (user?.username) {
+        if (user?.username && user?.role != "director") {
           getGroups();
         }
       }, [user]);
