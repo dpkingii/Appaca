@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.schema import NewUser
 from app.schema import Message
 from app.schema import LoginRequest
+from app.schema import MatchingForm
 from app.database import get_db
 from bson import ObjectId
 from datetime import datetime
@@ -109,3 +110,28 @@ async def get_messages(username: str, db = Depends(get_db)):
         message["recipient_id"] = str(message["recipient_id"])  # Convert recipient_id
     
     return sent_messages
+
+@app.post("/forms/")
+async def submit_form(form: MatchingForm, db=Depends(get_db)):
+    # Check if the user exists
+    user = await db.users.find_one({"username": form.username})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    form_data = {
+        "user_id": str(user["_id"]),
+        "username": form.username,
+        "role": form.role,
+        "topics": form.topics
+    }
+
+    # Optional: delete existing form and overwrite
+    await db.forms.delete_many({"user_id": str(user["_id"])})
+
+    result = await db.forms.insert_one(form_data)
+
+    return {
+        "message": "Form submitted successfully",
+        "form_id": str(result.inserted_id),
+        "topics": form.topics
+    }
