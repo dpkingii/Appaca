@@ -35,7 +35,7 @@ function LoginPage() {
 
             const data = await response.json();
             console.log("Login successful:", data);
-            setUser({ username: username, role: data.role});
+            setUser({ username: username, role: data.role, streak: data.streak});
             navigate('/display');
         } catch (e: any)
         {

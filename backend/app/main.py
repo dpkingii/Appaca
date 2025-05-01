@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from collections import defaultdict, Counter
 from app.schema import NewUser
-from app.schema import Message
 from app.schema import LoginRequest
 from app.schema import MatchingForm
 from app.database import get_db
@@ -20,6 +19,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
         
+matched = False
+
 @app.get("/")
 async def main(request: Request):
     print(f"Request headers: {request.headers}")
@@ -67,50 +68,7 @@ async def login(login_data: LoginRequest, db = Depends(get_db)):
     if user["password"] != login_data.password:
         raise HTTPException(status_code=400, detail="Incorrect password")    
     
-    return {"message": "Login successful", "username": user["username"], "role": user["role"]}
-
-@app.post("/messages/")
-async def send_message(message: Message, db = Depends(get_db)):
-
-    sender = await db.users.find_one({"username": message.sender_username})
-    if not sender:
-        raise HTTPException(status_code=404, detail="Sender not found")
-
-    recipient = await db.users.find_one({"username": message.recipient_username})
-    if not recipient:
-        raise HTTPException(status_code=404, detail="Sender not found")
-    
-    message_data = {
-        "sender_id": str(sender["_id"]),
-        "recipient_id": str(recipient["_id"]),
-        "content": message.content,
-        "timestamp": message.timestamp or datetime.now()  
-    }
-  
-    result = await db.messages.insert_one(message_data)
-
-    return {"message_id": str(result.inserted_id), "status": "Message sent successfully"}
-
-@app.get("/messages/{username}")
-async def get_messages(username: str, db = Depends(get_db)):
-    user = await db.users.find_one({"username": username})
-
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    sender_object_id = user["_id"]
-
-    sent_messages = await db.messages.find({"sender_id": str(sender_object_id)}).to_list(length=100)
-
-    if not sent_messages:
-        raise HTTPException(status_code=404, detail="No sent messages found")
-    
-    for message in sent_messages:
-        message["_id"] = str(message["_id"])  # Convert the message _id
-        message["sender_id"] = str(message["sender_id"])  # Convert sender_id
-        message["recipient_id"] = str(message["recipient_id"])  # Convert recipient_id
-    
-    return sent_messages
+    return {"message": "Login successful", "username": user["username"], "role": user["role"], "streak": user["streak"]}
 
 @app.post("/forms/")
 async def submit_form(form: MatchingForm, db=Depends(get_db)):
@@ -139,6 +97,8 @@ async def submit_form(form: MatchingForm, db=Depends(get_db)):
 
 @app.post("/match/")
 async def match_users(db = Depends(get_db)):
+    global matched
+    matched = True
     forms = await db.forms.find().to_list(length=None)
 
     mentors = [f for f in forms if f["role"] == "mentor"]
@@ -203,3 +163,7 @@ async def get_groups(username: str, db = Depends(get_db)):
         "mentor": group["mentor"],
         "students": group["students"]
     }
+
+@app.get("/match-status/")
+async def get_match_status():
+    return {"matched": matched}
