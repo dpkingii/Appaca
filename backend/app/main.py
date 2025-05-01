@@ -8,6 +8,7 @@ from app.schema import TwoTruths
 from app.database import get_db
 from bson import ObjectId
 from datetime import datetime
+import random
 
 # models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -193,3 +194,16 @@ async def submit_two_truths(submission: TwoTruths, db=Depends(get_db)):
 
     await db.games.insert_one(entry)
     return {"message": "Submission saved"}
+
+@app.get("/two-truths/{username}")
+async def get_game_by_username(username: str, db=Depends(get_db)):
+    submission = await db.games.find_one({"username": username})
+    
+    if not submission:
+        raise HTTPException(status_code=404, detail="Game not found for this user.")
+    
+    return {
+        "username": submission["username"],
+        "truths": submission["truths"],
+        "bug": submission["bug"]
+    }
