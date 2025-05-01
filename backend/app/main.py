@@ -4,6 +4,7 @@ from collections import defaultdict, Counter
 from app.schema import NewUser
 from app.schema import LoginRequest
 from app.schema import MatchingForm
+from app.schema import TwoTruths
 from app.database import get_db
 from bson import ObjectId
 from datetime import datetime
@@ -178,3 +179,17 @@ async def get_top_mentors(db=Depends(get_db)):
 
     top_mentors = await mentors_cursor.to_list(length=5)
     return top_mentors
+
+@app.post("/two-truths/")
+async def submit_two_truths(submission: TwoTruths, db=Depends(get_db)):
+    if len(submission.truths) != 2:
+        raise HTTPException(status_code=400, detail="You must submit exactly two truths.")
+
+    entry = {
+        "username": submission.username,
+        "truths": submission.truths,
+        "bug": submission.bug
+    }
+
+    await db.games.insert_one(entry)
+    return {"message": "Submission saved"}

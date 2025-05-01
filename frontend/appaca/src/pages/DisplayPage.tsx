@@ -52,11 +52,11 @@ function DisplayPage() {
     
         checkMatchStatus(); // initial call
     
-        const interval = setInterval(() => {
-            checkMatchStatus(); // keep checking every 10 seconds
-        }, 10000); // 10s
+        // const interval = setInterval(() => {
+        //     checkMatchStatus(); // keep checking every 10 seconds
+        // }, 10000); // 10s
     
-        return () => clearInterval(interval); // clean up
+        // return () => clearInterval(interval); // clean up
     }, [user]);
 
     useEffect(() => {
