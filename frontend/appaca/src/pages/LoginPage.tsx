@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useUser } from "./UserContext";
 import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css"
 
 function LoginPage() {
-
+    const { setUser } = useUser();
     const navigate = useNavigate();
     
     const [username, setUsername] = useState('');
@@ -33,6 +34,7 @@ function LoginPage() {
 
             const data = await response.json();
             console.log("Login successful:", data);
+            setUser({ username: username, role: data.role});
             navigate('/display');
         } catch (e: any)
         {

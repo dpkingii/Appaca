@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from "react";
+import { useUser } from "./UserContext";
 import "./DisplayPage.css";
 import { useNavigate } from 'react-router-dom'
 import sad from './Images/sadAlpaca.png';
@@ -7,10 +8,10 @@ import angry from './Images/angryAlpaca.png';
 import neutral from './Images/neutralAlpaca.png';
 import happy from './Images/happyAlpaca.png';
 
-
 function DisplayPage() {
      // TEMPORARY NEEDS DATA
-     
+     const { user } = useUser();
+
      const[streak,setStreak] = useState(6)
 
      let nameList: string[] = ["name1", "name2", "name3"];
@@ -39,20 +40,29 @@ function DisplayPage() {
      }
      groupList = groupList.substring(0,groupList.length - 2);
 
-
-
     const navigate = useNavigate();
     const handleTwoTruth = ()=> {
         setStreak(streak+1)
         navigate('/twoTruths')
     };
+
+    const match = async () => {
+        try {
+          const res = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
+          const data = await res.json();
+          console.log("Matching result:", data);
+        } catch (error) {
+          console.error("Error matching:", error);
+        }
+    };
+
     return (
         <>
             <div className = "all">
 
                 <div className = "topBar">
                     <h1>🦙 Appaca! 🦙</h1>
-                    <h2>@profilename</h2>
+                    <h2>@{user?.username}</h2>
                 </div>
 
                 <div className = "content">
@@ -62,16 +72,21 @@ function DisplayPage() {
                             <h3>Streak: {streak}</h3>
                         </div>
 
-                        <div className = "box">
+                        {(user?.role === "student" || user?.role === "mentor") && (
+                        <div className="box">
                             <h3>Mentor</h3>
                             <p>insert mentor name</p>
 
                             <h3>Group Members</h3>
                             <p>{groupList}</p>
-                            
-
                         </div>
+                        )}
 
+                        {user?.role === "director" && (
+                        <div className="box">
+                            <button style={{ backgroundColor: "rgb(223, 223, 223)", color: "white" }} onClick={match}>Match Mentors + Mentees</button>
+                        </div>
+                        )}
                     </div>
                     
                     <div className = "leaderboard">
