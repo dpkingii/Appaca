@@ -19,6 +19,8 @@ function DisplayPage() {
      const [nameList, setNameList] = useState<string[]>([]);
      const [mentorName, setMentorName] = useState<string>("");
 
+     const [topMentors, setTopMentors] = useState<{ username: string, streak: number }[]>([]);
+
      let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
      let leaderboardNum: number[] = [55, 40, 34,22,8];
  
@@ -47,9 +49,15 @@ function DisplayPage() {
     };
 
     useEffect(() => {
-        if (user?.username) {
-            checkMatchStatus();
-        }
+        if (!user?.username) return;
+    
+        checkMatchStatus(); // initial call
+    
+        const interval = setInterval(() => {
+            checkMatchStatus(); // keep checking every 10 seconds
+        }, 10000); // 10s
+    
+        return () => clearInterval(interval); // clean up
     }, [user]);
 
     useEffect(() => {
@@ -57,6 +65,10 @@ function DisplayPage() {
             getGroups();
         }
     }, [user, matched]);
+
+    useEffect(() => {
+        getTopMentors();
+    }, []);
 
     const checkMatchStatus = async () => {
         try {
@@ -88,6 +100,16 @@ function DisplayPage() {
             setNameList(group.students);
         } catch (error) {
             console.error("Error fetching group:", error);
+        }
+    };
+
+    const getTopMentors = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/top-mentors/");
+            const data = await response.json();
+            setTopMentors(data);
+        } catch (error) {
+            console.error("Error fetching top mentors:", error);
         }
     };
 
@@ -136,11 +158,12 @@ function DisplayPage() {
 
                             <div className = "board">
                                 
-                                <div className = "entry"> <p>01) @{leaderboardList[0]}</p> <div className = "number">{leaderboardNum[0]}</div> </div>
-                                <div className = "entry"> <p>02) @{leaderboardList[1]}</p> <div className = "number">{leaderboardNum[1]}</div> </div>
-                                <div className = "entry"> <p>03) @{leaderboardList[2]}</p> <div className = "number">{leaderboardNum[2]}</div> </div>
-                                <div className = "entry"> <p>04) @{leaderboardList[3]}</p> <div className = "number">{leaderboardNum[3]}</div> </div>
-                                <div className = "entry"> <p>05) @{leaderboardList[4]}</p> <div className = "number">{leaderboardNum[4]}</div> </div>
+                            {topMentors.map((mentor, index) => (
+                                <div className="entry" key={mentor.username}>
+                                    <p>{String(index + 1).padStart(2, '0')}) @{mentor.username}</p>
+                                    <div className="number">{mentor.streak}</div>
+                                </div>
+                            ))}
         
                             </div>
 
