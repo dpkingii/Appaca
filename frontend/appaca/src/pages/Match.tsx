@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
-
-
-
 //TODO: do processing to determine the values of roleToMatch, roleText.
 //SHOULD BE STORING IT SOMEWHERE SO WHEN WE GO TO THIS PAGE WE KNOW WHAT TO RENDER
 
@@ -15,6 +11,9 @@ function Match() {
         setRoleText('able to teach?');
     }, [])
 
+    const handleForms = async () => {
+
+    }
     return (
         <div>
             <svg className="bokeh" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +46,7 @@ function Match() {
                         <span className="button-shadow"></span>
                         <span className="button-edge"></span>
                         <span className="button-side-edge"></span>
-                        <span className="button-front text">
+                        <span className="button-front text" onClick={handleForms}>
                             Match to a {roleToMatch}
                         </span>
                     </button>
