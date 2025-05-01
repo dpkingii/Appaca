@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
-body{
-  margin-left: 0;
-  padding-left: 0;
-}
-
 .title-page-container {
-  height: 100vh;
-  width: 100vw;
+  padding: 0;
+  margin: 0;
+  height: 98vh;
   background: linear-gradient(135deg, #a7e9af, #6dbf63);
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
 }
 
 .title-page-content {
@@ -25,9 +22,11 @@ color: #5d3a00; /* brown color */
 font-size: 4rem;
 text-shadow: 2px 2px #a4743a;
 margin-bottom: 40px;
+margin-left: 0;
 }
 
 .title-page-content button {
+  margin: auto;
   background-color: #ffc857;
   color: #5d3a00;
   font-family: 'Fredoka One', cursive;
@@ -66,15 +65,15 @@ margin-bottom: 40px;
  }
 
 @keyframes shake {
-    0% { transform: translate(0px, 0px); }
-    25% { transform: translate(-5px, 5px); }
-    50% { transform: translate(5px, -5px); }
-    75% { transform: translate(-5px, 5px); }
-    100% { transform: translate(0px, 0px); }
-  }
-  
-  .title-image:hover {
-    animation: shake 0.5s;
-    animation-iteration-count: infinite;
-  }
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(-5px, 5px); }
+  50% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, 5px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+.title-image:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
 

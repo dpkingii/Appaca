@@ -5,15 +5,15 @@
     background: linear-gradient(135deg, #a7e9af, #6dbf63); 
     font-family: 'Fredoka One', cursive;
     overflow: auto;
-    padding: 10px;
     color: #5d3a00; /* brown color */
     font-size: 1.4rem;
     text-shadow: 2px 2px #a4743a;
     border-radius: 12px;
+    height: 98vh;
 }
 
 h1{
-    margin-left: none;
+    margin-left: 0;
 }
   
 .statements-container {
