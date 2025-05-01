@@ -31,4 +31,6 @@ class LoginRequest(BaseModel):
 
 class MatchingForm(BaseModel):
     username: str           #typically the id of the user
+    role: str
     topics: list[str]
+    

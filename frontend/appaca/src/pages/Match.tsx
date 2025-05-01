@@ -9,26 +9,54 @@ function Match() {
     const { user } = useUser();
     const [roleToMatch, setRole] = useState("");
     const [roleText, setRoleText] = useState('');
+    const navigate = useNavigate();
+
     useEffect(() => {
-        if(!user){
-            console.log("oops");
-        } else {
-            setRole(user.username);
-            if(user.role == 'student'){
-                setRole('mentor');
-            } else {
-                setRole('student');
-            }
-            if(user.username == 'student'){
-                setRoleText("What do you want to learn?")
-            } else {
-                setRoleText("What are you able to teach?");
-            }
-        }
-    }, [])
+        if (!user) return;
+    
+        if (user.role === 'student') {
+            setRole('mentor');
+            setRoleText("What do you want to learn?");
+          } else {
+            setRole('student');
+            setRoleText("What are you able to teach?");
+          }
+    }, [user]);
 
     const handleForms = async () => {
-
+        const selectedTopics: string[] = [];
+        
+        // Get all input elements that are checkboxes with name="topics"
+        const checkboxes = document.querySelectorAll('input[name="topics"]:checked');
+        
+        checkboxes.forEach((checkbox) => {
+            if (checkbox instanceof HTMLInputElement) {
+            selectedTopics.push(checkbox.value);
+            }
+        });
+        
+        console.log("Selected topics:", selectedTopics);
+        
+        // Example fetch POST
+        fetch("http://127.0.0.1:8000/forms/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: user ? user.username : '',       // Use dynamic username if needed
+                role: user ? user.role: '',
+                topics: selectedTopics,                     // Send selected topics
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+        console.log("Form submitted:", data);
+        })
+        .catch((err) => {
+        console.error("Form submission failed:", err);
+        });
+        navigate('/display');
     }
     return (
         <div>
@@ -50,13 +78,13 @@ function Match() {
                 <form method="POST">
                     <div style={{ display: "flexbox", margin: "20px" }}>
                         <label htmlFor="swe">SWE (Software Engineering)</label>
-                        <input type="checkbox" id="swe" value="SWE" /> <br /><br />
+                        <input type="checkbox" id="swe" value="SWE" name ='topics'/> <br /><br />
                         <label htmlFor="quant">Quant</label>
-                        <input type="checkbox" id="quant" value="Quant" /><br /><br />
+                        <input type="checkbox" id="quant" value="Quant" name ='topics'/><br /><br />
                         <label htmlFor="ai">AI</label>
-                        <input type="checkbox" id="ai" value="AI Research" /><br /><br />
+                        <input type="checkbox" id="ai" value="AI Research" name ='topics'/><br /><br />
                         <label htmlFor="pm">Project Management/Consulting</label>
-                        <input type="checkbox" id="pm" value="PM/Consulting" /><br /><br />
+                        <input type="checkbox" id="pm" value="PM/Consulting" name ='topics'/><br /><br />
                     </div>
                     <button className="ahhhh" role="button">
                         <span className="button-shadow"></span>
