@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
         
-matched = False
+matched = True
 
 @app.get("/")
 async def main(request: Request):
@@ -167,3 +167,14 @@ async def get_groups(username: str, db = Depends(get_db)):
 @app.get("/match-status/")
 async def get_match_status():
     return {"matched": matched}
+
+@app.get("/top-mentors/")
+async def get_top_mentors(db=Depends(get_db)):
+    # Query mentors and sort by streak descending, limit to 5
+    mentors_cursor = db.users.find(
+        {"role": "mentor"},
+        {"_id": 0, "username": 1, "streak": 1}
+    ).sort("streak", -1).limit(5)
+
+    top_mentors = await mentors_cursor.to_list(length=5)
+    return top_mentors
