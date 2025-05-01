@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
-import video from './Images/testVideo.mp4';
+// import video from './Images/testVideo.mp4';
+import animation from "./Images/alpacaAnimation3.png";
 
 function LandingPage() {
     const [message, setMessage] = useState("")
@@ -36,11 +37,14 @@ function LandingPage() {
                 <h1>🦙 Appaca! 🦙</h1>
             </div>
             
-            <div className = "video">
+            {/* <div className = "video">
                 <video id="myVideo" autoPlay muted playsInline height="400px">
                     <source src={video} type="video/mp4" />
                 </video>
-            </div>
+            </div> */}
+
+
+            <img src={animation} className="animation"/>
 
             <div className = "content-container">
                 <div className="fade-in">

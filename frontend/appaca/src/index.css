@@ -238,7 +238,7 @@ button {
 
   opacity: 0;
   animation: fadeIn 1.5s ease-out forwards;
-
+  animation-delay: 0s;
 }
 
 

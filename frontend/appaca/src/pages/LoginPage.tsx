@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css"
+import appaca from "./Images/appaca.png";
 
 function LoginPage() {
 
@@ -60,6 +61,8 @@ function LoginPage() {
             <div className = "title">
                 <h1>🦙 Appaca! 🦙</h1>
             </div>
+
+            <img src={appaca} className="animation"/>
 
         <div className="content-container">
 

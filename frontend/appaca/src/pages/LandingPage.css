@@ -92,6 +92,16 @@ video{
   left:0;
 }
 
+.animation {
+  margin-top: 0px;
+  padding-top:0px;
+  bottom: -80px;
+  width: 70vw;
+  padding-left:0px;
+  left: 0px;
+  position: fixed;
+}
+
 #root{
   padding-left:0;
 }
@@ -106,6 +116,7 @@ video{
   margin-right: 10vw;
   padding: 30px;
   border-radius: 40px;
+  /* animation-delay: 6.75s; */
 
   h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
