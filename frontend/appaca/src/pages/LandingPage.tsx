@@ -5,18 +5,6 @@ import "./LandingPage.css";
 import animation from "./Images/alpacaAnimation3.png";
 
 function LandingPage() {
-    const [message, setMessage] = useState("")
-
-    async function fetchHello() {
-        try {
-            const response = await fetch("http://localhost:8000/");
-            const data = await response.json();
-            setMessage(data.message);
-        } catch (err) {
-            console.log("Failed to fetch message from backend")
-        }
-    }
-
 
     return (
         <div>
@@ -80,26 +68,18 @@ function LandingPage() {
                     </button>
                 </Link>
 
-                <Link to="/notfound">
+                <Link to="/faq">
                     <button className="ahhhh" role="button">
                     <span className="button-shadow"></span>
                     <span className="button-edge"></span>
                     <span className="button-side-edge"></span>
                     <span className="button-front text">
-                        Go to Not Found (placeholder and test)
+                       Frequently Asked Questions 
                     </span>
                     </button>
                 </Link>
 
-                <button className="ahhhh" role="button" onClick={fetchHello}>
-                <span className="button-shadow"></span>
-                <span className="button-edge"></span>
-                <span className="button-side-edge"></span>
-                <span className="button-front text">
-                    Fetch from API
-                </span>
-                </button>
-                {message && <p>{message}</p>}
+                
 
                 </div>
 
