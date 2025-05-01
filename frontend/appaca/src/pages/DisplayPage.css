@@ -153,6 +153,13 @@
     align-self: center;
 }
 
+#twoTruthBtn:hover {
+    cursor: pointer;
+    background-color: #4cae4c;
+    transition: background-color 0.3s ease;
+}
+
 .backboard h3{
     text-align:center;
 }
+
