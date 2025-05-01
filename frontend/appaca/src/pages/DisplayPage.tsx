@@ -10,7 +10,9 @@ import happy from './Images/happyAlpaca.png';
 
 function DisplayPage() {
      // TEMPORARY NEEDS DATA
-     let streak = 20;
+     
+     const[streak,setStreak] = useState(6)
+
      let nameList: string[] = ["name1", "name2", "name3"];
      let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
      let leaderboardNum: number[] = [55, 40, 34,22,8];
@@ -40,7 +42,10 @@ function DisplayPage() {
 
 
     const navigate = useNavigate();
-    const handleLogin = async()=> { navigate('/twoTruths')};
+    const handleTwoTruth = ()=> {
+        setStreak(streak+1)
+        navigate('/twoTruths')
+    };
     return (
         <>
             <div className = "all">
@@ -85,7 +90,7 @@ function DisplayPage() {
 
                             <h3>Games</h3>
                             <div className = "games">
-                                <button onClick = {handleLogin}id = "twoTruthBtn"><p> Two Truth, One Bug </p></button>
+                                <button onClick = {handleTwoTruth}id = "twoTruthBtn"><p> Two Truth, One Bug </p></button>
                                 <button><p> [Code]DLE </p></button>
                                 <button><p> Connections </p></button>
                             </div>
@@ -99,9 +104,6 @@ function DisplayPage() {
                 </div>
 
             </div>
-            <h1>DisplayPage</h1>
-                <button onClick = {handleLogin}
-                id = "searchBtn"> Two Truth </button>
         </>
     )
 
