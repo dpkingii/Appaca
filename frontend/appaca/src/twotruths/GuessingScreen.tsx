@@ -18,12 +18,12 @@ function GuessingScreen() {
   ];  
   const dataFromBackend = {
     statements: statements,
-    bugIndex: 0, // Explicitly send the index of the bug
+    bugIndex: 1, // Explicitly send the index of the bug
   };
 
   const handleGuess = (index: number) => {
     // onSubmitGuess(index);
-    navigate('/game')
+    navigate('/display')
   };
 
   return (

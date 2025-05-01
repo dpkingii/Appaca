@@ -18,36 +18,36 @@ function GameScreen() {
     setBugIndex(index);
   };
 
-    const handleSubmit = async () => {
-        if (statements.some(statement => statement.trim() === '')) {
-          alert('Please enter all three statements.');
-          return;
-        }
-        if (bugIndex === null) {
-          alert('Please select which statement is the bug.');
-          return;
-        }
+  const handleSubmit = async () => {
+    if (statements.some(statement => statement.trim() === '')) {
+      alert('Please enter all three statements.');
+      return;
+    }
+    if (bugIndex === null) {
+      alert('Please select which statement is the bug.');
+      return;
+    }
+
+    const gameData = {
+      truths: statements.filter((_, index) => index !== bugIndex),
+      bug: statements[bugIndex],
+    };
+
     
-        const gameData = {
-          truths: statements.filter((_, index) => index !== bugIndex),
-          bug: statements[bugIndex],
-        };
-    
-        
-        console.log('Game Data to Backend:', gameData);
-        navigate('/display')
-      };
+    console.log('Game Data to Backend:', gameData);
+    navigate('/display')
+  };
 
 
   return (
     <div className="game-screen-container">
       <h1>Tell Us Two Truths and a Bug!</h1>
       <div className="game-screen-image">
-                  <img 
-                    src="https://png.pngtree.com/png-vector/20220713/ourmid/pngtree-insect-ladybug-cartoon-bugs-character-png-image_5932864.png" 
-                    alt="Cartoon bug graphic" 
-                    className="game-screen-image"
-                  />
+          <img 
+            src="https://png.pngtree.com/png-vector/20220713/ourmid/pngtree-insect-ladybug-cartoon-bugs-character-png-image_5932864.png" 
+            alt="Cartoon bug graphic" 
+            className="game-screen-image"
+          />
     </div>
       <div className="statements-container">
         {statements.map((statement, index) => (
