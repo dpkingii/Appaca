@@ -44,7 +44,13 @@ function LandingPage() {
             </div> */}
 
 
-            <img src={animation} className="animation"/>
+            {/* <img src={animation} className="animation"/> */}
+            <img
+                key={Date.now()} // force new image render
+                src={`${animation}?v=${Date.now()}`} // cache busting
+                alt="animation"
+                className="animation"
+            />
 
             <div className = "content-container">
                 <div className="fade-in">
