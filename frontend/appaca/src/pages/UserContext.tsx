@@ -1,8 +1,10 @@
+import { IntegerType } from "mongodb";
 import React, { createContext, useState, useContext, useEffect, ReactNode } from "react";
 
 interface User {
   username: string;
   role: string;
+  streak: IntegerType;
 }
 
 interface UserContextType {

@@ -6,6 +6,7 @@ class NewUser(BaseModel):
     email: EmailStr
     password: str
     role: str
+    streak: int 
 
     @validator('username')
     def validate_username(cls, v):
@@ -18,12 +19,6 @@ class NewUser(BaseModel):
         if len(v) < 6:
             raise ValueError('Password must be at least 6 characters long')
         return v
-
-class Message(BaseModel):
-    sender_username: str
-    recipient_username: str
-    content: str
-    timestamp: datetime = None
 
 class LoginRequest(BaseModel):
     username: str

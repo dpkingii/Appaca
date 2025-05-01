@@ -13,7 +13,8 @@ function DisplayPage() {
      // TEMPORARY NEEDS DATA
      const { user } = useUser();
 
-     const[streak,setStreak] = useState(6)
+     const[streak,setStreak] = useState(6);
+     const [matched, setMatched] = useState(false);
     
      const [nameList, setNameList] = useState<string[]>([]);
      const [mentorName, setMentorName] = useState<string>("");
@@ -46,18 +47,35 @@ function DisplayPage() {
     };
 
     useEffect(() => {
-        if (user?.username && user?.role != "director") {
-          getGroups();
+        if (user?.username) {
+            checkMatchStatus();
         }
-      }, [user]);
+    }, [user]);
+
+    useEffect(() => {
+        if (user?.username && user?.role !== 'director' && matched) {
+            getGroups();
+        }
+    }, [user, matched]);
+
+    const checkMatchStatus = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/match-status/");
+            const data = await response.json();
+            setMatched(data.matched);
+        } catch (err) {
+            console.error("Error checking match status", err);
+        }
+    };
       
     const match = async () => {
         try {
-          const response = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
-          const data = await response.json();
-          console.log("Matching result:", data);
+            const response = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
+            const data = await response.json();
+            console.log("Matching result:", data);
+            setMatched(true);
         } catch (error) {
-          console.error("Error matching:", error);
+            console.error("Error matching:", error);
         }
     };
 
@@ -90,13 +108,19 @@ function DisplayPage() {
                         </div>
 
                         {(user?.role === "student" || user?.role === "mentor") && (
-                        <div className="box">
-                            <h3>Mentor</h3>
-                            <p>{mentorName}</p>
+                            <div className="box">
+                                {!matched ? (
+                                <p> <br/>The director has not matched groups yet.</p>
+                                ) : (
+                                <>
+                                    <h3>Mentor</h3>
+                                    <p>{mentorName}</p>
 
-                            <h3>Group Members</h3>
-                            <p>{groupList}</p>
-                        </div>
+                                    <h3>Group Members</h3>
+                                    <p>{groupList}</p>
+                                </>
+                                )}
+                            </div>
                         )}
 
                         {user?.role === "director" && (

@@ -27,7 +27,8 @@ function SignupPage() {
                     username: username,     // Replace with the username
                     email: email,           // Replace with the email
                     password: password,     // Replace with the password
-                    role: role              // Replace with the role
+                    role: role,              // Replace with the role
+                    streak: 0
                 })
             });
 
