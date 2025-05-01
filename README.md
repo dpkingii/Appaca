@@ -16,6 +16,8 @@ A lot of us learned that we have a lot to learn about developing apps, but this 
 <h2>Backend</h2>
 <ol>
   <li>Navigate to backend folder</li>
+  <li>Run the Python command to setup the venv</li>
+  <li>Pip install all the dependencies</li>
   <li>Source the venv (on linux, this is source ./venv/bin/activate)</li>
   <li>Run this command: <strong>uvicorn app.main:app --reload<strong> </li>
   <li>Profit.</li>
