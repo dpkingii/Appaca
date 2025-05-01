@@ -65,6 +65,7 @@ textarea {
   
 .bug-button:hover {
     background-color: #5d3a00;
+    transition: background-color 0.3s ease;
 }
   
 .bug-selected textarea {

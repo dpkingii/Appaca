@@ -85,7 +85,7 @@ function DisplayPage() {
 
                             <h3>Games</h3>
                             <div className = "games">
-                                <button onClick = {handleLogin}id = "searchBtn"><p> Two Truth, One Bug </p></button>
+                                <button onClick = {handleLogin}id = "twoTruthBtn"><p> Two Truth, One Bug </p></button>
                                 <button><p> [Code]DLE </p></button>
                                 <button><p> Connections </p></button>
                             </div>
