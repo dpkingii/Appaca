@@ -3,27 +3,34 @@ import './GuessingScreen.css'; // Create this CSS file
 import { useNavigate } from 'react-router-dom'
 
 
-interface GuessingScreenProps {
-  statements: string[]; // Array of the three statements
-  onSubmitGuess: (guessedIndex: number) => void; // Function to handle the user's guess
-}
-
 function GuessingScreen() {
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+
   const navigate = useNavigate();
+
   const statements = [
     "I have a pet alpaca named Kevin.",
     "The capital of France is Berlin.",
     "I enjoy coding in my pajamas."
   ];  
+
   const dataFromBackend = {
     statements: statements,
     bugIndex: 1, // Explicitly send the index of the bug
   };
 
+
   const handleGuess = (index: number) => {
-    // onSubmitGuess(index);
-    navigate('/display')
+    if (index === dataFromBackend.bugIndex) {
+      // Correct guess, navigate to the display page
+      navigate('/display');
+    } else {
+      // Incorrect guess, show the error message
+      setErrorMessage('Oops! That statement is not the bug. Try again.');
+    }
   };
 
   return (
@@ -37,6 +44,7 @@ function GuessingScreen() {
       </div>
 
       <h1>Which Statement is the Bug?</h1>
+
       <ul className="statement-list">
         {statements.map((statement, index) => (
           <li
@@ -50,6 +58,8 @@ function GuessingScreen() {
           </li>
         ))}
       </ul>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 };
