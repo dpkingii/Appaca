@@ -114,6 +114,21 @@ function DisplayPage() {
 
     return (
         <>
+
+            <svg className="bokeh" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10%" cy="85%" r="10%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+                <circle cx="85%" cy="35%" r="15%"/>
+                <circle cx="60%" cy="85%" r="15%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+                <circle cx="35%" cy="25%" r="10%"/>
+                <circle cx="90%" cy="-25%" r="15%"/>
+                <circle cx="-15%" cy="30%" r="15%"/>
+                <circle cx="65%" cy="85%" r="10%"/>
+                <circle cx="45%" cy="50%" r="10%"/>
+            </svg>
+
+
             <div className = "all">
 
                 <div className = "topBar">
@@ -146,7 +161,10 @@ function DisplayPage() {
 
                         {user?.role === "director" && (
                         <div className="box">
-                            <button style={{ backgroundColor: "rgb(223, 223, 223)", color: "white" }} onClick={match}>Match Mentors + Mentees</button>
+                            {/* <button style={{ backgroundColor: "rgb(223, 223, 223)", color: "white" }} onClick={match}>Match Mentors + Mentees</button> */}
+                            <div className = "match">
+                                <button onClick={match}><h3>Match Mentors + Mentees</h3></button>
+                            </div>
                         </div>
                         )}
                     </div>

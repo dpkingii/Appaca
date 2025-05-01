@@ -11,11 +11,13 @@
 }
 
 .topBar{
-    padding: 1rem;
+    padding: 3rem;
     border-radius:8px;
     height:200px;
+    /* height was originally 200px; */
     color:white;
     margin-top:-5vh;
+    z-index: 1;
 }
 
 .topBar h1{
@@ -47,6 +49,7 @@
     width: 200px;
     border-radius:8px;
     height:80vh;
+    z-index: 1;
 }
 
 .sideBar img{
@@ -72,6 +75,7 @@
     flex-direction: column;
     height:80vh;
     margin-bottom:-10px;
+    z-index: 1;
 }
 
 .leaderboard h2{
@@ -114,6 +118,8 @@
 }
 
 .box{
+    /* display: flex;
+    justify-content: center; */
     margin-top:25px;
     border-radius:8px;
     background-color: rgb(223, 223, 223);
@@ -128,6 +134,30 @@
     font-family: National Park;
     margin-top:-13px;
 }
+
+.match {
+    display: flex;
+    justify-content: center;
+}
+
+.match button {
+    width: 600px;
+    height: 100px;
+    border-radius: 8px;
+    text-align: center;
+    border-width: 0px;
+    background-color:grey;
+    margin: 30px;
+    padding-top: 20px;
+}
+
+.match button:hover {
+    cursor: pointer;
+    background-color: #4cae4c;
+    transition: background-color 0.3s ease;
+}
+
+
 
 .games button{
     margin-top:-20px;
@@ -162,4 +192,3 @@
 .backboard h3{
     text-align:center;
 }
-
