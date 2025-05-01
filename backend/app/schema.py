@@ -29,3 +29,7 @@ class MatchingForm(BaseModel):
     role: str
     topics: list[str]
     
+class TwoTruths(BaseModel):
+    truths: list[str]
+    bug: str
+    username: str

@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { useUser } from "../pages/UserContext"
 import './GameScreen.css'; 
 
 function GameScreen() {
+    const { user } = useUser();
     const [statements, setStatements] = useState(['', '', '']);
     const [bugIndex, setBugIndex] = useState<number | null>(null);
     const navigate = useNavigate(); // If you want to navigate after submission
@@ -31,11 +33,22 @@ function GameScreen() {
     const gameData = {
       truths: statements.filter((_, index) => index !== bugIndex),
       bug: statements[bugIndex],
+      username: user?.username
     };
 
     
+    const response = await fetch('http://127.0.0.1:8000/two-truths/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(gameData),
+    });
+
+    if (!response.ok) throw new Error('Failed to submit game');
+    
     console.log('Game Data to Backend:', gameData);
-    navigate('/display')
+    navigate('/display');
   };
 
 
