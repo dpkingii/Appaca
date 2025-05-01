@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from "./UserContext";
 import "./SignupPage.css"
 
 function SignupPage() {
 
+    const { setUser } = useUser();
     const navigate = useNavigate();
-    
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,9 +64,14 @@ function SignupPage() {
             // If no error, proceed with success
             const data = await response.json();
             console.log(`success: ${JSON.stringify(data)}`);
-            navigate(`/login/`);  // Redirect to login after successful signup
+            setUser({ username: username, role: role });
+            if(role == "director"){
+                navigate(`/login`); 
+            } else {
+                navigate(`/match/`);  // Redirect to matching after successful signup
+            }
         } catch (e) {
-            setError(e.message);  // Show the error message from the backend
+            setError(e.message);  // Show the error message from the backen
             console.error("Error during signup:", e);
         }
     };
