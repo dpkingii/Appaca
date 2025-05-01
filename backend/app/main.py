@@ -66,7 +66,7 @@ async def login(login_data: LoginRequest, db = Depends(get_db)):
     if user["password"] != login_data.password:
         raise HTTPException(status_code=400, detail="Incorrect password")    
     
-    return {"message": "Login successful", "username": user["username"], "role": "student"}
+    return {"message": "Login successful", "username": user["username"], "role": user["role"]}
 
 @app.post("/messages/")
 async def send_message(message: Message, db = Depends(get_db)):
