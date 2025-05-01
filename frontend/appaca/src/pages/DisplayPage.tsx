@@ -1,17 +1,23 @@
 import React from 'react'
 import { useState } from "react";
+import { useUser } from "./UserContext";
 import "./DisplayPage.css";
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
 import sad from './Images/sadAlpaca.png';
 import angry from './Images/angryAlpaca.png';
 import neutral from './Images/neutralAlpaca.png';
 import happy from './Images/happyAlpaca.png';
 
-
 function DisplayPage() {
      // TEMPORARY NEEDS DATA
-     let streak = 20;
-     let nameList: string[] = ["name1", "name2", "name3"];
+     const { user } = useUser();
+
+     const[streak,setStreak] = useState(6)
+    
+     const [nameList, setNameList] = useState<string[]>([]);
+     const [mentorName, setMentorName] = useState<string>("");
+
      let leaderboardList: string[] = ["name1", "name2", "name3","name4","name5"];
      let leaderboardNum: number[] = [55, 40, 34,22,8];
  
@@ -31,23 +37,49 @@ function DisplayPage() {
      }
  
      // Create Name List
-     let groupList = "";
-     for(let i = 0;i<nameList.length;i++){
-         groupList += "@"+nameList[i]+", ";
-     }
-     groupList = groupList.substring(0,groupList.length - 2);
-
-
+     const groupList = nameList.map(name => "@" + name).join(", ");
 
     const navigate = useNavigate();
-    const handleLogin = async()=> { navigate('/twoTruths')};
+    const handleTwoTruth = ()=> {
+        setStreak(streak+1)
+        navigate('/twoTruths')
+    };
+
+    useEffect(() => {
+        if (user?.username && user?.role != "director") {
+          getGroups();
+        }
+      }, [user]);
+      
+    const match = async () => {
+        try {
+          const response = await fetch("http://127.0.0.1:8000/match/", { method: "POST" });
+          const data = await response.json();
+          console.log("Matching result:", data);
+        } catch (error) {
+          console.error("Error matching:", error);
+        }
+    };
+
+    const getGroups = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/groups/${user?.username}`);
+            const group = await response.json();
+            console.log("Group:", group);  
+            setMentorName(group.mentor);
+            setNameList(group.students);
+        } catch (error) {
+            console.error("Error fetching group:", error);
+        }
+    };
+
     return (
         <>
             <div className = "all">
 
                 <div className = "topBar">
                     <h1>🦙 Appaca! 🦙</h1>
-                    <h2>@profilename</h2>
+                    <h2>@{user?.username}</h2>
                 </div>
 
                 <div className = "content">
@@ -57,16 +89,21 @@ function DisplayPage() {
                             <h3>Streak: {streak}</h3>
                         </div>
 
-                        <div className = "box">
+                        {(user?.role === "student" || user?.role === "mentor") && (
+                        <div className="box">
                             <h3>Mentor</h3>
-                            <p>insert mentor name</p>
+                            <p>{mentorName}</p>
 
                             <h3>Group Members</h3>
                             <p>{groupList}</p>
-                            
-
                         </div>
+                        )}
 
+                        {user?.role === "director" && (
+                        <div className="box">
+                            <button style={{ backgroundColor: "rgb(223, 223, 223)", color: "white" }} onClick={match}>Match Mentors + Mentees</button>
+                        </div>
+                        )}
                     </div>
                     
                     <div className = "leaderboard">
@@ -85,7 +122,7 @@ function DisplayPage() {
 
                             <h3>Games</h3>
                             <div className = "games">
-                                <button onClick = {handleLogin}id = "twoTruthBtn"><p> Two Truth, One Bug </p></button>
+                                <button onClick = {handleTwoTruth}id = "twoTruthBtn"><p> Two Truth, One Bug </p></button>
                                 <button><p> [Code]DLE </p></button>
                                 <button><p> Connections </p></button>
                             </div>
@@ -99,9 +136,6 @@ function DisplayPage() {
                 </div>
 
             </div>
-            <h1>DisplayPage</h1>
-                <button onClick = {handleLogin}
-                id = "searchBtn"> Two Truth </button>
         </>
     )
 
