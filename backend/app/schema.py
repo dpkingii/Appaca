@@ -28,3 +28,7 @@ class Message(BaseModel):
 class LoginRequest(BaseModel):
     username: str
     password: str
+
+class MatchingForm(BaseModel):
+    username: str           #typically the id of the user
+    topics: list[str]
